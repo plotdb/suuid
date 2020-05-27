@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+echo "build src/suuid.ls -> dist/suuid.js ..."
+./node_modules/.bin/lsc -cbp src/suuid.ls > dist/suuid.js
+echo "minifying suuid.js ..."
+./node_modules/.bin/uglifyjs dist/suuid.js > dist/suuid.min.js
+
+echo "build uuid.js ..."
+./node_modules/.bin/lsc -cbp src/uuid.ls > dist/uuid.js
+browserify dist/uuid.js > dist/uuid.bundle.js
+
+echo "minifying suuid.js ..."
+./node_modules/.bin/uglifyjs dist/uuid.bundle.js > dist/uuid.min.js
+
+echo "bundle all files"
+cat dist/uuid.min.js dist/suuid.min.js > dist/suuid.bundle.min.js
+
+mkdir -p web/static/assets/lib/suuid
+cp dist/* web/static/assets/lib/suuid
+echo "done."
