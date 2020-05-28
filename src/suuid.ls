@@ -1,4 +1,5 @@
 (->
+  if module? => {v4: uuid-gen} = require "uuid" else uuid-gen = uuid
   hsh = {}
   map = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-$".split('');
   sep = "0"
@@ -19,7 +20,7 @@
     return r
 
   obj = (u) ->
-    if !u => u = uuid!
+    if !u => u = uuid-gen!
     u.split(\-).map(~> enc(parseInt(it, 16))).join(sep)
 
   if module? => module.exports = obj

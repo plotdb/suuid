@@ -10,6 +10,7 @@ echo "minifying uuid.js ..."
 
 echo "build src/suuid.ls -> dist/suuid.js ..."
 ./node_modules/.bin/lsc -cbp src/suuid.ls > dist/suuid.js
+./node_modules/.bin/lsc -cbp src/suuid.ls > dist/main.js
 echo "minifying suuid.js ..."
 ./node_modules/.bin/uglifyjs dist/suuid.js > dist/suuid.min.js
 

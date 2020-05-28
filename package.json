@@ -2,6 +2,7 @@
   "author": "zbryikt",
   "name": "suuid",
   "license": "MIT",
+  "lib": "dist/main.js",
   "description": "short uuid",
   "version": "0.0.1",
   "homepage": "https://github.com/plotdb/suuid",
