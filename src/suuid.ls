@@ -4,8 +4,6 @@
   map = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-$".split('');
   sep = "0"
   for i from 0 til map.length => hsh[map[i]] = i
-   
-
   enc = (v) ->
     r = ''
     while true
