@@ -1,7 +1,7 @@
 (->
   if module? => {v4: uuid-gen} = require "uuid" else uuid-gen = uuid
   hsh = {}
-  map = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-$".split('');
+  map = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-_".split('');
   sep = "0"
   for i from 0 til map.length => hsh[map[i]] = i
   enc = (v) ->
