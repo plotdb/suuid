@@ -3,6 +3,9 @@
   "name": "suuid",
   "license": "MIT",
   "main": "dist/main.js",
+  "files": [
+    "dist/**/*"
+  ],
   "description": "short uuid",
   "version": "0.0.1",
   "homepage": "https://github.com/plotdb/suuid",
