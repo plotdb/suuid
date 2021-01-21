@@ -3,16 +3,16 @@
 mkdir -p dist
 rm dist/*
 echo "build uuid.js ..."
-./node_modules/.bin/lsc -cbp src/uuid.ls > dist/uuid.js
-browserify dist/uuid.js > dist/uuid.bundle.js
+npx lsc -cbp src/uuid.ls > dist/uuid.js
+npx browserify dist/uuid.js > dist/uuid.bundle.js
 echo "minifying uuid.js ..."
-./node_modules/.bin/uglifyjs dist/uuid.bundle.js > dist/uuid.bundle.min.js
+npx uglifyjs dist/uuid.bundle.js > dist/uuid.bundle.min.js
 
 echo "build src/suuid.ls -> dist/suuid.js ..."
-./node_modules/.bin/lsc -cbp src/suuid.ls > dist/suuid.js
-./node_modules/.bin/lsc -cbp src/suuid.ls > dist/main.js
+npx lsc -cp src/suuid.ls > dist/suuid.js
+npx lsc -cp src/suuid.ls > dist/main.js
 echo "minifying suuid.js ..."
-./node_modules/.bin/uglifyjs dist/suuid.js > dist/suuid.min.js
+npx uglifyjs dist/suuid.js > dist/suuid.min.js
 
 echo "bundle all files"
 cat dist/uuid.bundle.js dist/suuid.js > dist/suuid.bundle.js

@@ -9,4 +9,4 @@ for i from 0 til total
     console.log "collide ( #id ) #count"
   hash[id] = true
 
-console.log "total collision: #{count}, percentage: #{100 * count / total}%"
+console.log "#total id generated. total collision: #{count}, percentage: #{100 * count / total}%"
