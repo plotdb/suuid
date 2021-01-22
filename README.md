@@ -12,6 +12,11 @@ short, sortable uuid. convert uuid into base 64 string along with coded timestam
       var ts = suuid.timestamp(id);
     </script>
 
+sample output ( try with `test/gen.ls` ):
+
+    generated suuid: OTeyNTN4r9fi49Wc5M.AsIMZT0NCe4
+    timestamp: 1611282605846 ( Fri Jan 22 2021 10:30:05 GMT+0800 (Taipei Standard Time) )
+
 
 ## Spec
 
