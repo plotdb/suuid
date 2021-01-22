@@ -1,3 +1,8 @@
+# 0.2.0
+
+ - use unreserved characters `_` and `.` to replace `+` ( reserved character ) and `-` ( delimiter for uuid ). 
+
+
 # 0.1.0
 
  - upgrade packages.

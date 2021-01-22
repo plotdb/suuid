@@ -226,7 +226,7 @@ window.uuid = v4;
   }
   sep = '';
   base64 = {
-    map: "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0+-",
+    map: "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_.",
     offset: 6,
     padding: "000000"
   };

@@ -2,7 +2,7 @@ if module? => {v4: uuid-gen} = require "uuid" else uuid-gen = uuid
 
 sep = ''
 base64 = do
-  map: "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0+-"
+  map: "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_."
   offset: 6
   padding: "000000"
 base16 = do
