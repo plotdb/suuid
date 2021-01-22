@@ -37,6 +37,39 @@ while length of codes corresponding to uuid part are fixed, length of the timest
 and the length of remaining part ( coded uuid, for randomness ) will be always 23 bytes long. thus, to sort suuid before 573202AD, simply add padding zeros before id to make it 32 bytes long.
 
 
+## Comparison
+
+ - [uniqid](https://github.com/adamhalasz/uniqid)
+   - 18 bytes
+   - no timestamp
+
+ - [ulid](https://github.com/ulid/spec)
+   - 48-bit timestamp + 80-bit entropy
+   - base32 encoding, fixed length ( 26 character string. )
+     - avoiding similar chars ( like `1IiJj` ) and is case insensitive.
+   - timestamped ( 1ms precision )
+     - overflow after 10889AD
+
+ - [ksuid](https://github.com/segmentio/ksuid)
+   - 32-bit timestamp + 128-bit entropy
+   - base62 encoding ( `0-9a-zA-Z` ), fixed length ( 27 characters string. )
+   - timestamped ( 1s precision )
+     - offset to start from `2014-03-05`
+     - overflow after 2150AD
+
+ - [@plotdb/suuid](https://github.com/plotdb/suuid)
+   - varied length timestamp ( 42-bit+ ) + 128-bit entropy
+   - base64 encoding ( `0-9a-zA-Z.-` ), varied length ( 30 characters + )
+   - timestamped ( 1ms precision )
+     - unix epoch timestamp ( since 1970-01-01 )
+
+ - [uuid v6 proposal](http://gh.peabody.io/uuidv6/)
+   - TBD
+   - try to add timestamp in uuid.
+   - just a draft, and was expired.
+   - [Github Repo](https://github.com/uuid6/uuid6-ietf-draft)
+
+
 ## License
 
 MIT
