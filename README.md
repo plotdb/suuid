@@ -26,7 +26,7 @@ sample output ( try with `test/gen.ls` ):
  - remove separator ( dash ) in uuid.
  - encodes values from hexadecimal to 64-based string with following charmap:
 
-    123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_.
+    `123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_.`
 
 while length of codes corresponding to uuid part are fixed, length of the timestamp code varys. The timestamp bits will be:
 
