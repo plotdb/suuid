@@ -1,3 +1,8 @@
+# 0.2.1
+
+ - update charmap in README.md to reflect the correct charmap used in code.
+
+
 # 0.2.0
 
  - use unreserved characters `_` and `.` to replace `+` ( reserved character ) and `-` ( delimiter for uuid ). 
