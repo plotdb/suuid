@@ -7,7 +7,7 @@
     "dist/**/*"
   ],
   "description": "short uuid with timestamp",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/plotdb/suuid",
   "repository": {
     "type": "git",
@@ -22,8 +22,12 @@
   },
   "devDependencies": {
     "browserify": "^17.0.0",
+    "buble": "^0.20.0",
     "livescript": "^1.6.0",
     "template": "github:zbryikt/template#v2.1.8",
     "uglify-js": "=3.2.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }

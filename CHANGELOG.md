@@ -1,3 +1,10 @@
+# 0.3.1
+
+ - add and upgrade `uuid` dependency
+ - add `buble` to transpile `uuid` ES5 syntax.
+ - update demo site with interactive generation demo
+
+
 # 0.3.0
 
  - add `encode` function for encode any `base16` id.

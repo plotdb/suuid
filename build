@@ -6,7 +6,7 @@ echo "build uuid.js ..."
 npx lsc -cbp src/uuid.ls > dist/uuid.js
 npx browserify dist/uuid.js > dist/uuid.bundle.js
 echo "minifying uuid.js ..."
-npx uglifyjs dist/uuid.bundle.js > dist/uuid.bundle.min.js
+npx buble dist/uuid.bundle.js | uglifyjs > dist/uuid.bundle.min.js
 
 echo "build src/suuid.ls -> dist/suuid.js ..."
 npx lsc -cp src/suuid.ls > dist/suuid.js
