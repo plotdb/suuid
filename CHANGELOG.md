@@ -1,3 +1,9 @@
+# 0.3.0
+
+ - add `encode` function for encode any `base16` id.
+ - tweak suuid option and document its usage.
+
+
 # 0.2.1
 
  - update charmap in README.md to reflect the correct charmap used in code.

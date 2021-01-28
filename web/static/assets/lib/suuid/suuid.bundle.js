@@ -264,9 +264,12 @@ window.uuid = v4;
   obj = function(u){
     var ref$, opt, ret;
     if (typeof u === 'object') {
-      ref$ = [u.uuid, u], u = ref$[0], opt = ref$[1];
+      ref$ = [u.id, u], u = ref$[0], opt = ref$[1];
     } else {
       opt = {};
+    }
+    if (!(opt.timestamp != null)) {
+      opt.timestamp = true;
     }
     if (!u) {
       u = uuidGen().toLowerCase();
@@ -274,12 +277,13 @@ window.uuid = v4;
     ret = u.split('-').map(function(d, i){
       return enc(d);
     }).join(sep);
-    ret = enc(Date.now()) + sep + ret;
+    ret = (opt.timestamp ? enc(Date.now()) : '') + sep + ret;
     return ret;
   };
   obj.timestamp = function(u){
     return parseInt(dec(u.substring(0, u.length - 23)).replace(/^0+/, ''), "16");
   };
+  obj.encode = enc;
   if (typeof module != 'undefined' && module !== null) {
     module.exports = obj;
   }

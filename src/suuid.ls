@@ -29,13 +29,15 @@ enc = (s) -> convert s, base16, base64
 dec = (s) -> convert s, base64, base16
 
 obj = (u) ->
-  if typeof(u) == \object => [u,opt] = [u.uuid, u] else opt = {}
+  if typeof(u) == \object => [u,opt] = [u.id, u] else opt = {}
+  if !(opt.timestamp?) => opt.timestamp = true
   if !u => u = uuid-gen!toLowerCase!
   ret = u.split(\-).map((d,i) ~> enc(d)).join(sep)
-  ret = enc(Date.now!) + sep + ret
+  ret = (if opt.timestamp => enc(Date.now!) else '') + sep + ret
   ret
 
 obj.timestamp = (u) -> parseInt(dec(u.substring(0, u.length - 23)).replace(/^0+/,''), "16")
+obj.encode = enc
 
 if module? => module.exports = obj
 if window? => window.suuid = obj

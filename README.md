@@ -10,6 +10,7 @@ short, sortable uuid. convert uuid into base 64 string along with coded timestam
     <script>
       var id = suuid();
       var ts = suuid.timestamp(id);
+      var short = suuid.encode("abc0123");
     </script>
 
 sample output ( try with `test/gen.ls` ):
@@ -18,11 +19,22 @@ sample output ( try with `test/gen.ls` ):
     timestamp: 1611282605846 ( Fri Jan 22 2021 10:30:05 GMT+0800 (Taipei Standard Time) )
 
 
+## API
+
+ - `suuid(opt)`: randomly return a suuid if `opt` is omitted. otherwise, `opt` can be:
+   - a `base16` string: return encoded corresponding string.
+   - an object `{id, timestamp}`: return an encoded `id` prefix with timestamp, if `timestamp` is true.
+     - `id`: a base16 string to encode.
+     - `timestamp`: true if prefix timestamp before encoded id. default true.
+ - `suuid.timestamp(id)`: get timestamp ( in epoch unix timestamp ) from given suuid
+ - `suuid.encode(s)`: simply encode a `base16` string to `base64` string ( with our charmap, see below )
+
+
 ## Spec
 
 `suuid` does following things:
 
- - prefix uuid(v4) with epoch unix timestamp 
+ - prefix uuid(v4) with epoch unix timestamp
  - remove separator ( dash ) in uuid.
  - encodes values from hexadecimal to 64-based string with following charmap:
 
