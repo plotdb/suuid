@@ -1,3 +1,8 @@
+# 0.3.2
+
+ - add command line tool for generating suuid quickly
+
+
 # 0.3.1
 
  - add and upgrade `uuid` dependency

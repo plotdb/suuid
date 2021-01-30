@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+rm -rf dist bin
 mkdir -p dist
-rm dist/*
+mkdir -p bin
 echo "build uuid.js ..."
 npx lsc -cbp src/uuid.ls > dist/uuid.js
 npx browserify dist/uuid.js > dist/uuid.bundle.js
@@ -13,6 +14,11 @@ npx lsc -cp src/suuid.ls > dist/suuid.js
 npx lsc -cp src/suuid.ls > dist/main.js
 echo "minifying suuid.js ..."
 npx uglifyjs dist/suuid.js > dist/suuid.min.js
+
+echo "build src/cli.ls -> bin/cli.js ..."
+echo "#!/usr/bin/env node" > bin/cli.js
+npx lsc -cp src/cli.ls >> bin/cli.js
+chmod 755 bin/cli.js
 
 echo "bundle all files"
 cat dist/uuid.bundle.js dist/suuid.js > dist/suuid.bundle.js
