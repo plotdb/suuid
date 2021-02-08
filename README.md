@@ -36,9 +36,10 @@ sample output ( try with `test/gen.ls` ):
 
  - prefix uuid(v4) with epoch unix timestamp
  - remove separator ( dash ) in uuid.
- - encodes values from hexadecimal to 64-based string with following charmap:
+ - encodes values from hexadecimal to 64-based string with following charmap: ( url-safe chars according to [the latest uri spec](https://tools.ietf.org/html/rfc3986)
 
     `123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_.`
+
 
 while length of codes corresponding to uuid part are fixed, length of the timestamp code varys. The timestamp bits will be:
 
