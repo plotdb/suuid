@@ -2,13 +2,13 @@
   "author": "zbryikt",
   "name": "@plotdb/suuid",
   "license": "MIT",
-  "main": "dist/main.js",
+  "main": "dist/suuid.js",
   "files": [
     "dist/**/*", "bin/**/*"
   ],
   "bin": {"suuid": "./bin/cli.js"},
   "description": "short uuid with timestamp",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "homepage": "https://github.com/plotdb/suuid",
   "repository": {
     "type": "git",

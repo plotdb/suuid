@@ -3,26 +3,27 @@
 rm -rf dist bin
 mkdir -p dist
 mkdir -p bin
-echo "build uuid.js ..."
-npx lsc -cbp src/uuid.ls > dist/uuid.js
-npx browserify dist/uuid.js > dist/uuid.bundle.js
-echo "minifying uuid.js ..."
-npx buble dist/uuid.bundle.js | uglifyjs > dist/uuid.bundle.min.js
+
+#echo "build uuid.js ..."
+#npx lsc -cbp src/uuid.ls > dist/uuid.js
+#npx browserify dist/uuid.js > dist/uuid.bundle.js
+#echo "minifying uuid.js ..."
+#npx buble dist/uuid.bundle.js | uglifyjs > dist/uuid.bundle.min.js
 
 echo "build src/suuid.ls -> dist/suuid.js ..."
-npx lsc -cp src/suuid.ls > dist/suuid.js
-npx lsc -cp src/suuid.ls > dist/main.js
+./node_modules/.bin/lsc -cp src/suuid.ls > dist/suuid.js
 echo "minifying suuid.js ..."
-npx uglifyjs dist/suuid.js > dist/suuid.min.js
+./node_modules/.bin/uglifyjs dist/suuid.js > dist/suuid.min.js
 
 echo "build src/cli.ls -> bin/cli.js ..."
 echo "#!/usr/bin/env node" > bin/cli.js
-npx lsc -cp src/cli.ls >> bin/cli.js
+./node_modules/.bin/lsc -cp src/cli.ls >> bin/cli.js
 chmod 755 bin/cli.js
 
-echo "bundle all files"
-cat dist/uuid.bundle.js dist/suuid.js > dist/suuid.bundle.js
-cat dist/uuid.bundle.min.js dist/suuid.min.js >> dist/suuid.bundle.min.js
+echo "bundle dist/suuid.js -> dist/suuid.bundle.js"
+./node_modules/.bin/browserify -s suuid dist/suuid.js > dist/suuid.bundle.js
+echo "minifying dist/suuid.bundle.js ..."
+./node_modules/.bin/uglifyjs dist/suuid.bundle.js > dist/suuid.bundle.min.js
 
 mkdir -p web/static/assets/lib/suuid
 cp dist/* web/static/assets/lib/suuid

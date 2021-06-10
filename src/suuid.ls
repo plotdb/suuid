@@ -1,4 +1,4 @@
-if module? => {v4: uuid-gen} = require "uuid" else uuid-gen = uuid
+{v4: uuid-gen} = require "uuid"
 
 sep = ''
 base64 = do
@@ -39,5 +39,4 @@ obj = (u) ->
 obj.timestamp = (u) -> parseInt(dec(u.substring(0, u.length - 23)).replace(/^0+/,''), "16")
 obj.encode = enc
 
-if module? => module.exports = obj
-if window? => window.suuid = obj
+module.exports = obj
