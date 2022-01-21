@@ -1,5 +1,19 @@
 # Change Logs
 
+## v0.5.0
+
+ - use `buble` to prevent uglifying failure
+ - further minimize generated js file with mangling and compression
+ - rename `suuid.js`, `suuid.min.js` etc to `index.js` and `index.min.js` etc
+ - update `main` and add `browser` field in `package.json`.
+ - remove unused code in `build`
+
+ - upgrade modules
+ - release with compact directory structure
+ - remove assets files from git
+ - patch test code to make it work with upgraded modules
+
+
 ## v0.4.0
 
  - tweak build and code structure to prevent from accessing window object directly.

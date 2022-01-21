@@ -12,7 +12,7 @@
     "suuid": "./bin/cli.js"
   },
   "description": "short uuid with timestamp",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "homepage": "https://github.com/plotdb/suuid",
   "repository": {
     "type": "git",
