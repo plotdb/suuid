@@ -4,26 +4,20 @@ rm -rf dist bin
 mkdir -p dist
 mkdir -p bin
 
-#echo "build uuid.js ..."
-#npx lsc -cbp src/uuid.ls > dist/uuid.js
-#npx browserify dist/uuid.js > dist/uuid.bundle.js
-#echo "minifying uuid.js ..."
-#npx buble dist/uuid.bundle.js | uglifyjs > dist/uuid.bundle.min.js
-
-echo "build src/suuid.ls -> dist/suuid.js ..."
-./node_modules/.bin/lsc -cp --no-header src/suuid.ls > dist/suuid.js
-echo "minifying suuid.js ..."
-./node_modules/.bin/uglifyjs dist/suuid.js -m -c > dist/suuid.min.js
+echo "build src/index.ls -> dist/index.js ..."
+./node_modules/.bin/lsc -cp --no-header src/index.ls > dist/index.js
+echo "minifying index.js ..."
+./node_modules/.bin/uglifyjs dist/index.js -m -c > dist/index.min.js
 
 echo "build src/cli.ls -> bin/cli.js ..."
 echo "#!/usr/bin/env node" > bin/cli.js
 ./node_modules/.bin/lsc -cp --no-header src/cli.ls >> bin/cli.js
 chmod 755 bin/cli.js
 
-echo "bundle dist/suuid.js -> dist/suuid.bundle.js"
-./node_modules/.bin/browserify -s suuid dist/suuid.js > dist/suuid.bundle.js
-echo "minifying dist/suuid.bundle.js ..."
-cat dist/suuid.bundle.js | ./node_modules/.bin/buble | ./node_modules/.bin/uglifyjs -m -c > dist/suuid.bundle.min.js
+echo "bundle dist/index.js -> dist/index.bundle.js"
+./node_modules/.bin/browserify -s suuid dist/index.js > dist/index.bundle.js
+echo "minifying dist/index.bundle.js ..."
+cat dist/index.bundle.js | ./node_modules/.bin/buble | ./node_modules/.bin/uglifyjs -m -c > dist/index.bundle.min.js
 
 mkdir -p web/static/assets/lib/suuid
 cp dist/* web/static/assets/lib/suuid

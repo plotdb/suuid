@@ -2,7 +2,8 @@
   "author": "zbryikt",
   "name": "@plotdb/suuid",
   "license": "MIT",
-  "main": "dist/suuid.js",
+  "browser": "dist/index.min.js",
+  "main": "dist/index.min.js",
   "files": [
     "dist/**/*",
     "bin/**/*"
