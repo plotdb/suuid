@@ -11,19 +11,19 @@ mkdir -p bin
 #npx buble dist/uuid.bundle.js | uglifyjs > dist/uuid.bundle.min.js
 
 echo "build src/suuid.ls -> dist/suuid.js ..."
-./node_modules/.bin/lsc -cp src/suuid.ls > dist/suuid.js
+./node_modules/.bin/lsc -cp --no-header src/suuid.ls > dist/suuid.js
 echo "minifying suuid.js ..."
-./node_modules/.bin/uglifyjs dist/suuid.js > dist/suuid.min.js
+./node_modules/.bin/uglifyjs dist/suuid.js -m -c > dist/suuid.min.js
 
 echo "build src/cli.ls -> bin/cli.js ..."
 echo "#!/usr/bin/env node" > bin/cli.js
-./node_modules/.bin/lsc -cp src/cli.ls >> bin/cli.js
+./node_modules/.bin/lsc -cp --no-header src/cli.ls >> bin/cli.js
 chmod 755 bin/cli.js
 
 echo "bundle dist/suuid.js -> dist/suuid.bundle.js"
 ./node_modules/.bin/browserify -s suuid dist/suuid.js > dist/suuid.bundle.js
 echo "minifying dist/suuid.bundle.js ..."
-./node_modules/.bin/uglifyjs dist/suuid.bundle.js > dist/suuid.bundle.min.js
+cat dist/suuid.bundle.js | ./node_modules/.bin/buble | ./node_modules/.bin/uglifyjs -m -c > dist/suuid.bundle.min.js
 
 mkdir -p web/static/assets/lib/suuid
 cp dist/* web/static/assets/lib/suuid
