@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.5.1
+
+ - fix bug: `suuid` command failed due to incorrect path in cli.ls
+
+
 ## v0.5.0
 
  - use `buble` to prevent uglifying failure
