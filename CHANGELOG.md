@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.5.2 (upcoming)
+
+ - audit fix to fix dependency vulnerability
+
+
 ## v0.5.1
 
  - fix bug: `suuid` command failed due to incorrect path in cli.ls
