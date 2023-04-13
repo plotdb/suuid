@@ -56,7 +56,7 @@
  - use unreserved characters `_` and `.` to replace `+` ( reserved character ) and `-` ( delimiter for uuid ). 
 
 
-###v v0.1.0
+## v0.1.0
 
  - upgrade packages.
  - fix bug: integer overflow may lead to incorrect decode result.
