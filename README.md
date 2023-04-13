@@ -72,7 +72,7 @@ and the length of remaining part ( coded uuid, for randomness ) will be always 2
 
  - [@plotdb/suuid](https://github.com/plotdb/suuid)
    - varied length timestamp ( 42-bit+ ) + 128-bit entropy
-   - base64 encoding ( `0-9a-zA-Z.-` ), varied length ( 30 characters + )
+   - base64 encoding ( `0-9a-zA-Z._` ), varied length ( 30 characters + )
    - timestamped ( 1ms precision )
      - unix epoch timestamp ( since `1970-01-01` )
 
