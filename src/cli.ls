@@ -1,2 +1,3 @@
 suuid = require "../dist/index"
-console.log suuid!
+nots = '--nots' in process.argv.slice(2)
+console.log suuid(if nots => {timestamp: false})

@@ -1,8 +1,10 @@
 # Change Logs
 
-## v0.5.2 (upcoming)
+## v0.6.0
 
  - audit fix to fix dependency vulnerability
+ - support `--nots` option and `timestamp` option for generating even shorter suuid (without timestamp)
+ - remove `_` and `.` to keep the encoding event simpler with one additional character tradeoff
 
 
 ## v0.5.1

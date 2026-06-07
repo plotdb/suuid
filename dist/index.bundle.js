@@ -1,43 +1,30 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.suuid = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function(){
-  var uuidGen, sep, base64, base16, convert, enc, dec, obj;
+  var uuidGen, sep, base62map, log62, zeroes, enc, dec, obj;
   uuidGen = require("uuid").v4;
   sep = '';
-  base64 = {
-    map: "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0_.",
-    offset: 6,
-    padding: "000000"
-  };
-  base16 = {
-    map: "0123456789abcdef",
-    offset: 4,
-    padding: "0000"
-  };
-  convert = function(s, src, des){
-    var bits, ref$, len, count, r, i$, i, idx;
-    if (typeof s === 'string') {
-      bits = s.split('').map(function(c){
-        return (src.padding + src.map.indexOf(c).toString(2)).slice(-src.offset);
-      }).reduce(function(a, b){
-        return a + '/' + b;
-      }, '');
-    } else {
-      bits = s.toString(2);
+  base62map = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  log62 = Math.log2(62);
+  zeroes = "000000000";
+  enc = function(s, pad){
+    var n, r;
+    n = typeof s === 'string' ? parseInt(s, 16) : s;
+    r = "";
+    while (n !== 0) {
+      r = base62map[n % 62] + r;
+      n = Math.floor(n / 62);
     }
-    bits = bits.replace(/\//g, '');
-    ref$ = [bits.length, Math.ceil(bits.length / des.offset), ""], len = ref$[0], count = ref$[1], r = ref$[2];
-    for (i$ = 0; i$ < count; ++i$) {
-      i = i$;
-      idx = parseInt(bits.substring(len - (i + 1) * des.offset, len - i * des.offset), 2);
-      r = des.map[idx] + r;
+    if (pad) {
+      r = (zeroes + r).slice(-pad);
     }
     return r;
   };
-  enc = function(s){
-    return convert(s, base16, base64);
-  };
   dec = function(s){
-    return convert(s, base64, base16);
+    var n;
+    n = s.split('').reduce(function(acc, c){
+      return acc * 62 + base62map.indexOf(c);
+    }, 0);
+    return n.toString(16);
   };
   obj = function(u){
     var ref$, opt, ret;
@@ -53,15 +40,17 @@
       u = uuidGen().toLowerCase();
     }
     ret = u.split('-').map(function(d, i){
-      return enc(d);
+      return enc(d, Math.ceil(d.length * 4 / log62));
     }).join(sep);
     ret = (opt.timestamp ? enc(Date.now()) : '') + sep + ret;
     return ret;
   };
   obj.timestamp = function(u){
-    return parseInt(dec(u.substring(0, u.length - 23)).replace(/^0+/, ''), "16");
+    return parseInt(dec(u.substring(0, u.length - 24)).replace(/^0+/, ''), 16);
   };
-  obj.encode = enc;
+  obj.encode = function(s){
+    return enc(s, Math.ceil(s.length * 4 / log62));
+  };
   module.exports = obj;
 }).call(this);
 

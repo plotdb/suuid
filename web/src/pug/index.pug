@@ -7,14 +7,17 @@ html
   body
     .w-1024.text-center.p-4
       #btn.btn.btn-primary.btn-lg.mb-4 Generate suuid
-      textarea.form-control#text(rows="10")
-    script(src="/assets/lib/suuid/suuid.bundle.min.js")
+      textarea.form-control#text(rows="10",style="font-family:monospace")
+    script(src="/assets/lib/suuid/main/index.bundle.min.js")
 
     script: :lsc
       btn.addEventListener \click, ->
-        id = suuid!
-        ts = suuid.timestamp(id)
+        id1 = suuid!
+        id2 = suuid timestamp: false
+        ts = suuid.timestamp(id1)
         text.value = """
-        generated suuid: #{id}
+        generated suuid: #{id1}
         timestamp: #{ts} ( #{new Date(ts).toString!} )
+
+        generated suuid: #{id2} (no timestamp)
         """
