@@ -5,6 +5,8 @@
  - audit fix to fix dependency vulnerability
  - support `--nots` option and `timestamp` option for generating even shorter suuid (without timestamp)
  - remove `_` and `.` to keep the encoding event simpler with one additional character tradeoff
+ - remove `uuid` dependency, instead use nodejs / browser native crypto function
+ - remove buble and browserify since we don't depend on uuid anymore
 
 
 ## v0.5.1

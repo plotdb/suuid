@@ -1,10 +1,41 @@
 (function(){
-  var uuidGen, sep, base62map, log62, zeroes, enc, dec, obj;
-  uuidGen = require("uuid").v4;
+  var sep, base62map, log62, zeroes, randomBytes, ref$, hex2, uuidV4, enc, dec, obj;
   sep = '';
   base62map = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   log62 = Math.log2(62);
   zeroes = "000000000";
+  randomBytes = (typeof require != 'undefined' && require !== null) && ((ref$ = require('crypto')) != null ? ref$.randomBytes : void 8) != null
+    ? function(n){
+      return require('crypto').randomBytes(n);
+    }
+    : function(n){
+      var buf;
+      buf = new Uint8Array(n);
+      crypto.getRandomValues(buf);
+      return buf;
+    };
+  hex2 = function(n){
+    return ("0" + n.toString(16)).slice(-2);
+  };
+  uuidV4 = function(){
+    var b;
+    b = randomBytes(16);
+    b[6] = b[6] & 0x0f | 0x40;
+    b[8] = b[8] & 0x3f | 0x80;
+    return [
+      [0, 1, 2, 3].map(function(it){
+        return hex2(b[it]);
+      }).join(''), [4, 5].map(function(it){
+        return hex2(b[it]);
+      }).join(''), [6, 7].map(function(it){
+        return hex2(b[it]);
+      }).join(''), [8, 9].map(function(it){
+        return hex2(b[it]);
+      }).join(''), [10, 11, 12, 13, 14, 15].map(function(it){
+        return hex2(b[it]);
+      }).join('')
+    ].join('-');
+  };
   enc = function(s, pad){
     var n, r;
     n = typeof s === 'string' ? parseInt(s, 16) : s;
@@ -36,7 +67,7 @@
       opt.timestamp = true;
     }
     if (!u) {
-      u = uuidGen().toLowerCase();
+      u = uuidV4();
     }
     ret = u.split('-').map(function(d, i){
       return enc(d, Math.ceil(d.length * 4 / log62));
@@ -50,5 +81,9 @@
   obj.encode = function(s){
     return enc(s, Math.ceil(s.length * 4 / log62));
   };
-  module.exports = obj;
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = obj;
+  } else {
+    window.suuid = obj;
+  }
 }).call(this);

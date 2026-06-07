@@ -14,10 +14,9 @@ echo "#!/usr/bin/env node" > bin/cli.js
 ./node_modules/.bin/lsc -cp --no-header src/cli.ls >> bin/cli.js
 chmod 755 bin/cli.js
 
-echo "bundle dist/index.js -> dist/index.bundle.js"
-./node_modules/.bin/browserify -s suuid dist/index.js > dist/index.bundle.js
-echo "minifying dist/index.bundle.js ..."
-cat dist/index.bundle.js | ./node_modules/.bin/buble | ./node_modules/.bin/uglifyjs -m -c > dist/index.bundle.min.js
+echo "copying index.js -> dist/index.bundle.js (for backward compatibility) ..."
+cp dist/index.js dist/index.bundle.js
+cp dist/index.min.js dist/index.bundle.min.js
 
 mkdir -p web/static/assets/lib/suuid/main
 cp dist/* web/static/assets/lib/suuid/main
