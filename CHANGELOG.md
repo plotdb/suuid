@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.6.2
+
+ - fix bug: crypto module not found
+
+
 ## v0.6.1
 
  - fix bug: Cannot find module '../dist/index'

@@ -1,19 +1,29 @@
 (function(){
-  var sep, base62map, log62, zeroes, randomBytes, ref$, hex2, uuidV4, enc, dec, obj;
+  var sep, base62map, log62, zeroes, randomBytes, ref$, e, hex2, uuidV4, enc, dec, obj;
   sep = '';
   base62map = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   log62 = Math.log2(62);
   zeroes = "000000000";
-  randomBytes = (typeof require != 'undefined' && require !== null) && ((ref$ = require('crypto')) != null ? ref$.randomBytes : void 8) != null
-    ? function(n){
-      return require('crypto').randomBytes(n);
-    }
-    : function(n){
+  if ((typeof crypto != 'undefined' && crypto !== null) && crypto.getRandomValues != null) {
+    randomBytes = function(n){
       var buf;
       buf = new Uint8Array(n);
       crypto.getRandomValues(buf);
       return buf;
     };
+  } else if (typeof require != 'undefined' && require !== null) {
+    try {
+      ((ref$ = require('crypto')) != null ? ref$.randomBytes : void 8) != null;
+      randomBytes = function(n){
+        return require('crypto').randomBytes(n);
+      };
+    } catch (e$) {
+      e = e$;
+      throw new Error("no available crypto module for suuid (require failed)");
+    }
+  } else {
+    throw new Error("no available crypto module for suuid");
+  }
   hex2 = function(n){
     return ("0" + n.toString(16)).slice(-2);
   };

@@ -3,13 +3,19 @@ base62map = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 log62 = Math.log2 62
 zeroes = "000000000"
 
-random-bytes = if require? and (require \crypto)?.randomBytes?
-  (n) -> require(\crypto).randomBytes n
-else
-  (n) ->
+if crypto? and crypto.getRandomValues? =>
+  random-bytes = (n) ->
     buf = new Uint8Array n
     crypto.getRandomValues buf
     buf
+else if require? =>
+  try
+    require(\crypto)?randomBytes?
+    random-bytes = (n) -> require(\crypto).randomBytes n
+  catch e
+    throw new Error("no available crypto module for suuid (require failed)")
+else
+  throw new Error("no available crypto module for suuid")
 
 hex2 = (n) -> ("0" + n.toString(16)).slice -2
 
