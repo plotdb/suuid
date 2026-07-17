@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.6.1
+
+ - fix bug: Cannot find module '../dist/index'
+
+
 ## v0.6.0
 
  - audit fix to fix dependency vulnerability
